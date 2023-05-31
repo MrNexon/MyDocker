@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  global_db:
+    image: mysql
+    container_name: global_db
+
+    environment:
+      MYSQL_ROOT_PASSWORD: Ehfjuehtxbr20
+
+    ports:
+      - "6033:3306"
+
+    volumes:
+      - ./db:/var/lib/mysql472
+
+    restart: always
+
+  global_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: global_phpmyadmin
+    links:
+      - global_db
+
+    environment:
+      PMA_HOST: global_db
+
+    restart: always
+    ports:
+      - 8080:80
